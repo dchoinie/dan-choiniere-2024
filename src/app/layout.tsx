@@ -3,9 +3,6 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
-import MainNavigation from "./_components/MainNavigation";
-import Footer from "./_components/Footer";
-
 export const metadata: Metadata = {
   title: "Dan Choiniere | Frontend Developer",
   description: "Portfolio website for Dan Choiniere",
@@ -17,11 +14,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <MainNavigation />
-        {children}
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

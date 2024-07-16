@@ -15,6 +15,11 @@ import Link from "next/link";
 import { FileDownIcon, Github, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import { githubUrl, xUrl, linkedinUrl } from "../_constants";
+import clsx from "clsx";
+
+interface MainNavigationProps {
+  dark?: boolean;
+}
 
 const navItems: NavItem[] = [
   {
@@ -47,14 +52,19 @@ const navItems: NavItem[] = [
   },
 ];
 
-const MainNavigation = (): JSX.Element => {
+const MainNavigation = ({ dark }: MainNavigationProps): JSX.Element => {
   return (
-    <div className="relative z-50 mx-8 flex justify-between py-8">
+    <div
+      className={clsx(
+        "relative z-50 mx-8 flex justify-between py-8",
+        dark ? "text-white" : "text-slate-900",
+      )}
+    >
       <NavigationMenu>
         <NavigationMenuList className="gap-12">
           {navItems.map((navItem: NavItem, i: number) => (
             <NavigationMenuItem key={`${i} - ${navItem.name}`}>
-              <Link href={navItem.link} className="text-white">
+              <Link href={navItem.link} className="text-inherit">
                 {navItem.name}
               </Link>
             </NavigationMenuItem>
@@ -71,7 +81,7 @@ const MainNavigation = (): JSX.Element => {
                 download
                 target="_blank"
               >
-                <FileDownIcon size={24} className="text-white" />
+                <FileDownIcon size={24} className="text-inherit" />
               </a>
             </TooltipTrigger>
             <TooltipContent>
@@ -85,7 +95,7 @@ const MainNavigation = (): JSX.Element => {
           <Tooltip>
             <TooltipTrigger>
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github size={24} className="text-white" />
+                <Github size={24} className="text-inherit" />
               </a>
             </TooltipTrigger>
             <TooltipContent>
@@ -100,7 +110,7 @@ const MainNavigation = (): JSX.Element => {
             <TooltipTrigger>
               <a href={xUrl} target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/images/x-logo-white.png"
+                  src={dark ? "/images/x-logo-white.png" : "/images/x-logo.png"}
                   width={24}
                   height={24}
                   className="h-[24px] self-center"
@@ -119,7 +129,7 @@ const MainNavigation = (): JSX.Element => {
           <Tooltip>
             <TooltipTrigger>
               <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-                <LinkedinIcon size={24} className="text-white" />
+                <LinkedinIcon size={24} className="text-inherit" />
               </a>
             </TooltipTrigger>
             <TooltipContent>
