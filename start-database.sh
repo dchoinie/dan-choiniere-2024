@@ -28,11 +28,11 @@ if [ "$(docker ps -q -a -f name=$DB_CONTAINER_NAME)" ]; then
 fi
 
 # import env variables from .env
-set -a
+set -an
 source .env
 
-DB_PASSWORD=$(echo "$DATABASE_URL" | awk -F':' '{print $3}' | awk -F'@' '{print $1}')
-DB_PORT=$(echo "$DATABASE_URL" | awk -F':' '{print $4}' | awk -F'\/' '{print $1}')
+DB_PASSWORD=$(echo "$POSTGRES_URL" | awk -F':' '{print $3}' | awk -F'@' '{print $1}')
+DB_PORT=$(echo "$POSTGRES_URL" | awk -F':' '{print $4}' | awk -F'\/' '{print $1}')
 
 if [ "$DB_PASSWORD" = "password" ]; then
   echo "You are using the default database password"
