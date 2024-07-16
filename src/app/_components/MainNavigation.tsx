@@ -2,13 +2,17 @@ import React from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "~/components/ui/navigation-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { type NavItem } from "./NavItem";
 import Link from "next/link";
-import { navigationMenuTriggerStyle } from "~/components/ui/navigation-menu";
-import { Github, LinkedinIcon } from "lucide-react";
+import { FileDownIcon, Github, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import { githubUrl, xUrl, linkedinUrl } from "../_constants";
 
@@ -16,6 +20,14 @@ const navItems: NavItem[] = [
   {
     name: "Home",
     link: "/",
+  },
+  {
+    name: "Work",
+    link: "/work",
+  },
+  {
+    name: "Skills",
+    link: "/skills",
   },
   {
     name: "Projects",
@@ -37,7 +49,7 @@ const navItems: NavItem[] = [
 
 const MainNavigation = (): JSX.Element => {
   return (
-    <div className="flex justify-between p-8">
+    <div className="relative z-50 mx-8 flex justify-between py-8">
       <NavigationMenu>
         <NavigationMenuList className="gap-12">
           {navItems.map((navItem: NavItem, i: number) => (
@@ -50,21 +62,71 @@ const MainNavigation = (): JSX.Element => {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="relative z-50 flex items-center gap-12">
-        <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-          <Github size={24} className="text-white" />
-        </a>
-        <a href={xUrl} target="_blank" rel="noopener noreferrer">
-          <Image
-            src="/images/x-logo-white.png"
-            width={24}
-            height={24}
-            className="self-center"
-            alt="X Logo"
-          />
-        </a>
-        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-          <LinkedinIcon size={24} className="text-white" />
-        </a>
+        {/* Resume */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <a
+                href="/documents/Dan_Choiniere_Resume.pdf"
+                download
+                target="_blank"
+              >
+                <FileDownIcon size={24} className="text-white" />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Download Resume</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        {/* GitHub */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                <Github size={24} className="text-white" />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>GitHub</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        {/* X */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <a href={xUrl} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="/images/x-logo-white.png"
+                  width={24}
+                  height={24}
+                  className="h-[24px] self-center"
+                  alt="X Logo"
+                />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>X</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        {/* Linkedin */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+                <LinkedinIcon size={24} className="text-white" />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Linkedin</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
     </div>
   );

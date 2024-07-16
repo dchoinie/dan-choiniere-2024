@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import MainNavigation from "./_components/MainNavigation";
+import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
   title: "Dan Choiniere | Frontend Developer",
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body>
         <MainNavigation />
         {children}
+        <Footer />
       </body>
     </html>
   );
